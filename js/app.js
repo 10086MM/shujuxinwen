@@ -2388,64 +2388,30 @@
   }
 
   function setFrameHeight(iframe, height) {
-    if (height > 0) {
-      iframe.style.height = Math.ceil(height) + 'px';
-      iframe.style.minHeight = '0';
-    }
+    if (!(height > 0)) return;
+    var next = Math.ceil(height) + 'px';
+    if (iframe.style.height === next) return;
+    iframe.style.height = next;
+    iframe.style.minHeight = '0';
+    iframe.style.maxHeight = 'none';
   }
 
-  function measureEmbedDocument(doc) {
-    var body = doc.body;
-    if (!body) return 0;
-    var bodyStyle = doc.defaultView.getComputedStyle(body);
-    var padBottom = parseFloat(bodyStyle.paddingBottom) || 0;
-    var bottom = 0;
-    var children = body.children;
-    for (var i = 0; i < children.length; i++) {
-      var el = children[i];
-      var style = doc.defaultView.getComputedStyle(el);
-      if (style.display === 'none' || style.visibility === 'hidden') continue;
-      if (style.position === 'fixed' || style.position === 'sticky') continue;
-      var rect = el.getBoundingClientRect();
-      var marginBottom = parseFloat(style.marginBottom) || 0;
-      bottom = Math.max(bottom, rect.bottom + marginBottom);
-    }
-    if (bottom <= 0) {
-      bottom = body.getBoundingClientRect().bottom;
-    }
-    return Math.ceil(bottom + (doc.defaultView.pageYOffset || 0) + padBottom + 8);
-  }
-
-  function resizeFromDocument(iframe) {
-    try {
-      var win = iframe.contentWindow;
-      var doc = iframe.contentDocument || win.document;
-      if (!doc || !doc.body) return;
-
-      // 先缩到内容，避免 8000px 拉高导致 scrollHeight 虚高
-      iframe.style.height = '1px';
-      win.requestAnimationFrame(function () {
-        setFrameHeight(iframe, measureEmbedDocument(doc));
-      });
-    } catch (_) {}
-  }
-
+  /* 子页 embed-child.js 负责测高；父页只接收 postMessage，不再自行把 iframe 拉高 */
   document.querySelectorAll('.embed-frame').forEach(function (iframe) {
     iframe.setAttribute('scrolling', 'no');
-
+    iframe.style.height = '0';
+    iframe.style.minHeight = '0';
     iframe.addEventListener('load', function () {
-      resizeFromDocument(iframe);
-      [100, 300, 600, 1200, 2500].forEach(function (delay) {
-        window.setTimeout(function () {
-          resizeFromDocument(iframe);
-        }, delay);
-      });
+      try {
+        if (iframe.contentWindow) {
+          iframe.contentWindow.postMessage({ type: 'embed-parent-ready' }, '*');
+        }
+      } catch (_) {}
     });
   });
 
   window.addEventListener('message', function (event) {
     if (!event.data || event.data.type !== 'embed-resize') return;
-
     document.querySelectorAll('.embed-frame').forEach(function (iframe) {
       try {
         if (iframe.contentWindow === event.source) {
@@ -2457,7 +2423,7 @@
 })();
 
 
-/* ===== js/embed-child.js（父页不执行；保留占位以免历史混淆） ===== */
+/* ===== embed-child 占位 ===== */
 (function () {
   if (window.parent === window) return;
 })();

@@ -13,8 +13,8 @@ body{font-family:'PingFang SC','Noto Sans SC',sans-serif;color:#3d2b1f;backgroun
 .embed-pane{display:none}
 .embed-pane.is-active{display:block}
 /* taboo */
-.taboo .container{max-width:1140px;margin:0 auto;padding:30px 20px}
-.taboo .hero{text-align:center;padding:44px 20px 36px;margin-bottom:36px}
+.taboo .container{max-width:1140px;margin:0 auto;padding:16px 20px 8px}
+.taboo .hero{text-align:center;padding:20px 20px 24px;margin-bottom:20px}
 .taboo .hero h1{font-size:2.8rem;font-weight:900;letter-spacing:5px}
 .taboo .hero .tag{display:inline-block;margin-top:12px;background:#c4a574;color:#3d2b1f;padding:6px 28px;border-radius:999px;font-weight:700;font-size:.95rem}
 .taboo .gates{display:flex;gap:28px}
@@ -32,9 +32,9 @@ body{font-family:'PingFang SC','Noto Sans SC',sans-serif;color:#3d2b1f;backgroun
 .taboo .fcard .mini{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.62));color:#fff;font-size:.72rem;padding:18px 6px 5px;text-align:center}
 .taboo .fcard .tip{position:absolute;inset:0;background:rgba(30,20,10,.82);color:#ffe8c8;font-size:.78rem;display:flex;align-items:center;justify-content:center;padding:8px;text-align:center;opacity:0;transition:opacity .2s;border-radius:16px}
 .taboo .fcard:hover .tip{opacity:1}
-.taboo .quote{margin:48px 0 20px;background:rgba(245,239,230,.65);border-radius:40px 12px 40px 12px;padding:26px 30px;text-align:center;font-size:1.05rem}
+.taboo .quote{margin:28px 0 12px;background:rgba(245,239,230,.65);border-radius:40px 12px 40px 12px;padding:20px 24px;text-align:center;font-size:1.05rem}
 .taboo .quote b{font-size:1.3rem}
-.taboo footer{text-align:center;padding:28px 0 18px;font-size:.72rem;color:#786653;border-top:1px solid #dbcfbe;margin-top:40px}
+.taboo footer{text-align:center;padding:16px 0 8px;font-size:.72rem;color:#786653;border-top:1px solid #dbcfbe;margin-top:20px}
 /* twelve */
 .twelve body,.twelve{color:#5c3d2e}
 .twelve .header{text-align:center;padding:50px 20px;margin-bottom:50px;color:#4a4036}
@@ -60,6 +60,7 @@ body{font-family:'PingFang SC','Noto Sans SC',sans-serif;color:#3d2b1f;backgroun
 </style>
 </head>
 <body>
+<div id="embed-fit">
 
 <div id="pane-taboo" class="embed-pane taboo">
 <div class="container">
@@ -122,6 +123,7 @@ body{font-family:'PingFang SC','Noto Sans SC',sans-serif;color:#3d2b1f;backgroun
   document.title = view === 'taboo' ? '长街宴 · 信仰筛选' : '哈尼族长街宴·十二道风味图谱';
 })();
 </script>
+</div>
 <script src="js/embed-child.js"></script>
 </body>
 </html>

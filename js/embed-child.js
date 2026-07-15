@@ -1,42 +1,34 @@
 (function () {
   if (window.parent === window) return;
 
-  /**
-   * 只量 body 实际内容底部，不用量 html/body 的 scrollHeight。
-   * 否则父页把 iframe 临时拉高后，会把视口空白算进高度。
-   */
-  function measureHeight() {
-    var body = document.body;
-    if (!body) return 0;
-
-    var bodyStyle = window.getComputedStyle(body);
-    var padBottom = parseFloat(bodyStyle.paddingBottom) || 0;
-    var bottom = 0;
-    var children = body.children;
-
-    for (var i = 0; i < children.length; i++) {
-      var el = children[i];
-      var style = window.getComputedStyle(el);
-      if (style.display === 'none' || style.visibility === 'hidden') continue;
-      if (style.position === 'fixed' || style.position === 'sticky') continue;
-      var rect = el.getBoundingClientRect();
-      var marginBottom = parseFloat(style.marginBottom) || 0;
-      bottom = Math.max(bottom, rect.bottom + marginBottom);
-    }
-
-    if (bottom <= 0) {
-      bottom = body.getBoundingClientRect().bottom;
-    }
-
-    return Math.ceil(bottom + window.pageYOffset + padBottom + 8);
+  function getRoot() {
+    return document.getElementById('embed-fit') || document.body;
   }
 
+  function measureHeight() {
+    var root = getRoot();
+    if (!root) return 0;
+    /* 只量内容包裹层自身高度，不受 iframe 视口拉高影响 */
+    var rect = root.getBoundingClientRect();
+    var style = window.getComputedStyle(root);
+    var mt = parseFloat(style.marginTop) || 0;
+    var mb = parseFloat(style.marginBottom) || 0;
+    return Math.max(1, Math.ceil(rect.height + mt + mb + 2));
+  }
+
+  var timer = 0;
   function notify() {
-    window.parent.postMessage({ type: 'embed-resize', height: measureHeight() }, '*');
+    window.clearTimeout(timer);
+    timer = window.setTimeout(function () {
+      window.parent.postMessage({ type: 'embed-resize', height: measureHeight() }, '*');
+    }, 16);
   }
 
   window.addEventListener('load', notify);
   window.addEventListener('resize', notify);
+  window.addEventListener('message', function (event) {
+    if (event.data && event.data.type === 'embed-parent-ready') notify();
+  });
 
   document.querySelectorAll('img').forEach(function (img) {
     if (img.complete) return;
@@ -44,13 +36,12 @@
     img.addEventListener('error', notify);
   });
 
-  if (typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(function () {
-      window.requestAnimationFrame(notify);
-    }).observe(document.body);
+  var root = getRoot();
+  if (root && typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(notify).observe(root);
   }
 
-  [50, 150, 400, 800, 1500, 3000].forEach(function (delay) {
+  [30, 120, 400, 1000, 2000].forEach(function (delay) {
     window.setTimeout(notify, delay);
   });
 })();
