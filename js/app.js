@@ -2399,7 +2399,6 @@
   /* 子页 embed-child.js 负责测高；父页只接收 postMessage，不再自行把 iframe 拉高 */
   document.querySelectorAll('.embed-frame').forEach(function (iframe) {
     iframe.setAttribute('scrolling', 'no');
-    iframe.style.height = '0';
     iframe.style.minHeight = '0';
     iframe.addEventListener('load', function () {
       try {
