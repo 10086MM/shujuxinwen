@@ -1,16 +1,34 @@
 (function () {
   if (window.parent === window) return;
 
+  /**
+   * 只量 body 实际内容底部，不用量 html/body 的 scrollHeight。
+   * 否则父页把 iframe 临时拉高后，会把视口空白算进高度。
+   */
   function measureHeight() {
     var body = document.body;
-    var html = document.documentElement;
-    /* 不用 clientHeight：父页面临时拉高 iframe 时会把视口高度误算进内容高度 */
-    return Math.max(
-      body.scrollHeight,
-      body.offsetHeight,
-      html.scrollHeight,
-      html.offsetHeight
-    );
+    if (!body) return 0;
+
+    var bodyStyle = window.getComputedStyle(body);
+    var padBottom = parseFloat(bodyStyle.paddingBottom) || 0;
+    var bottom = 0;
+    var children = body.children;
+
+    for (var i = 0; i < children.length; i++) {
+      var el = children[i];
+      var style = window.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden') continue;
+      if (style.position === 'fixed' || style.position === 'sticky') continue;
+      var rect = el.getBoundingClientRect();
+      var marginBottom = parseFloat(style.marginBottom) || 0;
+      bottom = Math.max(bottom, rect.bottom + marginBottom);
+    }
+
+    if (bottom <= 0) {
+      bottom = body.getBoundingClientRect().bottom;
+    }
+
+    return Math.ceil(bottom + window.pageYOffset + padBottom + 8);
   }
 
   function notify() {
@@ -27,10 +45,12 @@
   });
 
   if (typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(notify).observe(document.body);
+    new ResizeObserver(function () {
+      window.requestAnimationFrame(notify);
+    }).observe(document.body);
   }
 
-  [50, 150, 400, 800, 1500, 3000, 5000].forEach(function (delay) {
+  [50, 150, 400, 800, 1500, 3000].forEach(function (delay) {
     window.setTimeout(notify, delay);
   });
 })();

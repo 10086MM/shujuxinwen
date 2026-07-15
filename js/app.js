@@ -2390,7 +2390,30 @@
   function setFrameHeight(iframe, height) {
     if (height > 0) {
       iframe.style.height = Math.ceil(height) + 'px';
+      iframe.style.minHeight = '0';
     }
+  }
+
+  function measureEmbedDocument(doc) {
+    var body = doc.body;
+    if (!body) return 0;
+    var bodyStyle = doc.defaultView.getComputedStyle(body);
+    var padBottom = parseFloat(bodyStyle.paddingBottom) || 0;
+    var bottom = 0;
+    var children = body.children;
+    for (var i = 0; i < children.length; i++) {
+      var el = children[i];
+      var style = doc.defaultView.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden') continue;
+      if (style.position === 'fixed' || style.position === 'sticky') continue;
+      var rect = el.getBoundingClientRect();
+      var marginBottom = parseFloat(style.marginBottom) || 0;
+      bottom = Math.max(bottom, rect.bottom + marginBottom);
+    }
+    if (bottom <= 0) {
+      bottom = body.getBoundingClientRect().bottom;
+    }
+    return Math.ceil(bottom + (doc.defaultView.pageYOffset || 0) + padBottom + 8);
   }
 
   function resizeFromDocument(iframe) {
@@ -2399,16 +2422,10 @@
       var doc = iframe.contentDocument || win.document;
       if (!doc || !doc.body) return;
 
-      iframe.style.height = '8000px';
-
+      // 先缩到内容，避免 8000px 拉高导致 scrollHeight 虚高
+      iframe.style.height = '1px';
       win.requestAnimationFrame(function () {
-        var height = Math.max(
-          doc.body.scrollHeight,
-          doc.body.offsetHeight,
-          doc.documentElement.scrollHeight,
-          doc.documentElement.offsetHeight
-        );
-        setFrameHeight(iframe, height);
+        setFrameHeight(iframe, measureEmbedDocument(doc));
       });
     } catch (_) {}
   }
@@ -2418,7 +2435,7 @@
 
     iframe.addEventListener('load', function () {
       resizeFromDocument(iframe);
-      [100, 300, 600, 1200, 2500, 4000, 6000].forEach(function (delay) {
+      [100, 300, 600, 1200, 2500].forEach(function (delay) {
         window.setTimeout(function () {
           resizeFromDocument(iframe);
         }, delay);
@@ -2440,42 +2457,9 @@
 })();
 
 
-/* ===== js/embed-child.js ===== */
+/* ===== js/embed-child.js（父页不执行；保留占位以免历史混淆） ===== */
 (function () {
   if (window.parent === window) return;
-
-  function measureHeight() {
-    var body = document.body;
-    var html = document.documentElement;
-    /* 不用 clientHeight：父页面临时拉高 iframe 时会把视口高度误算进内容高度 */
-    return Math.max(
-      body.scrollHeight,
-      body.offsetHeight,
-      html.scrollHeight,
-      html.offsetHeight
-    );
-  }
-
-  function notify() {
-    window.parent.postMessage({ type: 'embed-resize', height: measureHeight() }, '*');
-  }
-
-  window.addEventListener('load', notify);
-  window.addEventListener('resize', notify);
-
-  document.querySelectorAll('img').forEach(function (img) {
-    if (img.complete) return;
-    img.addEventListener('load', notify);
-    img.addEventListener('error', notify);
-  });
-
-  if (typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(notify).observe(document.body);
-  }
-
-  [50, 150, 400, 800, 1500, 3000, 5000].forEach(function (delay) {
-    window.setTimeout(notify, delay);
-  });
 })();
 
 /* ===== 内联环形礼仪图 ===== */

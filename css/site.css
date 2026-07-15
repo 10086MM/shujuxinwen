@@ -2370,11 +2370,11 @@ body.pattern-modal-open {
 
 .embed-frame-wrap--figure {
   margin: 16px 0 12px;
-  min-height: 420px;
+  min-height: 0;
 }
 
 .embed-frame-wrap--figure .embed-frame {
-  min-height: 420px;
+  min-height: 0;
 }
 
 .embed-frame {
