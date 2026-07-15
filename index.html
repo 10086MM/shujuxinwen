@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>逛长街大席！一站式读懂哈尼衣食乐！</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <!-- 宣纸底纹 + 四角民族纹样（全局固定层） -->
+  <div class="ethnic-bg" aria-hidden="true">
+    <div class="ethnic-bg__layer ethnic-bg__fiber"></div>
+    <div class="ethnic-bg__layer ethnic-bg__aged"></div>
+    <div class="ethnic-bg__corner ethnic-bg__corner--tl">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pattern-octagon"/></svg>
+    </div>
+    <div class="ethnic-bg__corner ethnic-bg__corner--tr">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pattern-papercut"/></svg>
+    </div>
+    <div class="ethnic-bg__corner ethnic-bg__corner--bl">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pattern-diamond"/></svg>
+    </div>
+    <div class="ethnic-bg__corner ethnic-bg__corner--br">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#pattern-flower"/></svg>
+    </div>
+
+    <!-- 左右固定纹样栏：剪纸 / 哈尼 / 民族几何，避开中间正文区 -->
+    <div class="ethnic-bg__rail ethnic-bg__rail--left" aria-hidden="true">
+      <div class="ethnic-bg__motif" style="--motif-top:6%"><svg viewBox="0 0 100 100"><use href="#pattern-papercut"/></svg></div>
+      <div class="ethnic-bg__motif" style="--motif-top:18%"><svg viewBox="0 0 100 100"><use href="#pattern-octagon"/></svg></div>
+      <div class="ethnic-bg__motif ethnic-bg__motif--sm" style="--motif-top:30%"><svg viewBox="0 0 100 100"><use href="#pattern-papercut-bird"/></svg></div>
+      <div class="ethnic-bg__motif" style="--motif-top:42%"><svg viewBox="0 0 100 100"><use href="#pattern-papercut-window"/></svg></div>
+      <div class="ethnic-bg__motif ethnic-bg__motif--sm" style="--motif-top:54%"><svg viewBox="0 0 100 100"><use href="#pattern-fern"/></svg></div>
+      <div class="ethnic-bg__motif" style="--motif-top:66%"><svg viewBox="0 0 120 60"><use href="#pattern-cloud"/></svg></div>
+      <div class="ethnic-bg__motif ethnic-bg__motif--sm" style="--motif-top:78%"><svg viewBox="0 0 100 100"><use href="#pattern-miao"/></svg></div>
+      <div class="ethnic-bg__motif" style="--motif-top:90%"><svg viewBox="0 0 100 30"><use href="#pattern-scroll"/></svg></div>
+    </div>
+    <div class="ethnic-bg__rail ethnic-bg__rail--right" aria-hidden="true">
+      <div class="ethnic-bg__motif" style="--motif-top:8%"><svg viewBox="0 0 100 100"><use href="#pattern-sun"/></svg></div>
+      <div class="ethnic-bg__motif ethnic-bg__motif--sm" style="--motif-top:20%"><svg viewBox="0 0 100 100"><use href="#pattern-yi-zigzag"/></svg></div>
+      <div class="ethnic-bg__motif" style="--motif-top:32%"><svg viewBox="0 0 100 100"><use href="#pattern-papercut"/></svg></div>
+      <div class="ethnic-bg__motif" style="--motif-top:44%"><svg viewBox="0 0 100 100"><use href="#pattern-diamond"/></svg></div>
+      <div class="ethnic-bg__motif ethnic-bg__motif--sm" style="--motif-top:56%"><svg viewBox="0 0 100 100"><use href="#pattern-geometry"/></svg></div>
+      <div class="ethnic-bg__motif" style="--motif-top:68%"><svg viewBox="0 0 100 100"><use href="#pattern-papercut-bird"/></svg></div>
+      <div class="ethnic-bg__motif ethnic-bg__motif--sm" style="--motif-top:80%"><svg viewBox="0 0 100 100"><use href="#pattern-flower"/></svg></div>
+      <div class="ethnic-bg__motif" style="--motif-top:92%"><svg viewBox="0 0 100 100"><use href="#pattern-octagon"/></svg></div>
+    </div>
+    <div class="ethnic-bg__veil" aria-hidden="true"></div>
+  </div>
+
+  <!-- 纹样素材库 SVG 精灵 -->
+  <svg class="ethnic-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <!-- 哈尼族八角花 -->
+      <symbol id="pattern-octagon" viewBox="0 0 100 100">
+        <g fill="none" stroke="#8b1a1a" stroke-width="1.2">
+          <polygon points="50,8 72,22 72,50 50,64 28,50 28,22" opacity="0.9"/>
+          <polygon points="50,22 62,30 62,46 50,54 38,46 38,30" opacity="0.7"/>
+          <line x1="50" y1="8" x2="50" y2="64"/><line x1="28" y1="22" x2="72" y2="50"/>
+          <line x1="72" y1="22" x2="28" y2="50"/><line x1="28" y1="50" x2="72" y2="22"/>
+          <line x1="72" y1="50" x2="28" y2="22"/>
+          <circle cx="50" cy="36" r="4" fill="#d4a843" stroke="none" opacity="0.8"/>
+          <path d="M50,64 L50,78 M38,50 L24,58 M62,50 L76,58 M28,22 L16,14 M72,22 L84,14" stroke="#2f5a4a" stroke-width="0.8" opacity="0.5"/>
+        </g>
+      </symbol>
+      <!-- 剪纸团花 / 铜鼓纹 -->
+      <symbol id="pattern-papercut" viewBox="0 0 100 100">
+        <g fill="none" stroke="#8b1a1a" stroke-width="1">
+          <circle cx="50" cy="50" r="38"/>
+          <circle cx="50" cy="50" r="28" stroke-dasharray="4 3"/>
+          <circle cx="50" cy="50" r="18"/>
+          <path d="M50,12 L54,22 L50,32 L46,22 Z M50,68 L54,78 L50,88 L46,78 Z M12,50 L22,54 L32,50 L22,46 Z M68,50 L78,54 L88,50 L78,46 Z" fill="#d4a843" stroke="none" opacity="0.6"/>
+          <path d="M50,12 L50,88 M12,50 L88,50 M22,22 L78,78 M78,22 L22,78" stroke="#3d2b1f" stroke-width="0.6" opacity="0.4"/>
+          <circle cx="50" cy="50" r="6" fill="#8b1a1a" stroke="none" opacity="0.5"/>
+        </g>
+      </symbol>
+      <!-- 菱形回字纹 -->
+      <symbol id="pattern-diamond" viewBox="0 0 100 100">
+        <g fill="none" stroke="#2f5a4a" stroke-width="1">
+          <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)"/>
+          <rect x="30" y="30" width="40" height="40" transform="rotate(45 50 50)"/>
+          <rect x="38" y="38" width="24" height="24" transform="rotate(45 50 50)"/>
+          <path d="M50,14 L50,86 M14,50 L86,50" stroke="#8b1a1a" stroke-width="0.7" opacity="0.5"/>
+          <path d="M26,26 L74,74 M74,26 L26,74" stroke="#d4a843" stroke-width="0.5" opacity="0.4"/>
+        </g>
+      </symbol>
+      <!-- 小花卉 / 星点 -->
+      <symbol id="pattern-flower" viewBox="0 0 100 100">
+        <g fill="#d4a843" stroke="#8b1a1a" stroke-width="0.6">
+          <circle cx="50" cy="30" r="6" opacity="0.7"/><circle cx="70" cy="50" r="6" opacity="0.7"/>
+          <circle cx="50" cy="70" r="6" opacity="0.7"/><circle cx="30" cy="50" r="6" opacity="0.7"/>
+          <circle cx="62" cy="34" r="4" opacity="0.5"/><circle cx="66" cy="58" r="4" opacity="0.5"/>
+          <circle cx="38" cy="58" r="4" opacity="0.5"/><circle cx="34" cy="34" r="4" opacity="0.5"/>
+          <circle cx="50" cy="50" r="5" fill="#8b1a1a" stroke="none"/>
+        </g>
+      </symbol>
+      <!-- 几何三角 / 菱形组合 -->
+      <symbol id="pattern-geometry" viewBox="0 0 100 100">
+        <g fill="none" stroke="#3d2b1f" stroke-width="1">
+          <polygon points="50,15 75,50 50,85 25,50" stroke="#8b1a1a"/>
+          <polygon points="50,28 62,50 50,72 38,50" stroke="#2f5a4a" opacity="0.7"/>
+          <line x1="25" y1="50" x2="75" y2="50" stroke="#d4a843" stroke-width="0.6"/>
+          <line x1="50" y1="15" x2="50" y2="85" stroke="#d4a843" stroke-width="0.6"/>
+          <circle cx="50" cy="50" r="3" fill="#d4a843" stroke="none"/>
+        </g>
+      </symbol>
+      <!-- 太阳纹 -->
+      <symbol id="pattern-sun" viewBox="0 0 100 100">
+        <g fill="none" stroke="#d4a843" stroke-width="1">
+          <circle cx="50" cy="50" r="14" fill="#8b1a1a" fill-opacity="0.3" stroke="#8b1a1a"/>
+          <line x1="50" y1="8" x2="50" y2="28"/><line x1="50" y1="72" x2="50" y2="92"/>
+          <line x1="8" y1="50" x2="28" y2="50"/><line x1="72" y1="50" x2="92" y2="50"/>
+          <line x1="20" y1="20" x2="34" y2="34"/><line x1="66" y1="66" x2="80" y2="80"/>
+          <line x1="80" y1="20" x2="66" y2="34"/><line x1="34" y1="66" x2="20" y2="80"/>
+          <circle cx="50" cy="50" r="22" stroke="#2f5a4a" stroke-width="0.6" opacity="0.5"/>
+          <circle cx="50" cy="50" r="32" stroke-dasharray="3 4" opacity="0.4"/>
+        </g>
+      </symbol>
+      <!-- 祥云线条 -->
+      <symbol id="pattern-cloud" viewBox="0 0 120 60">
+        <g fill="none" stroke="#d4a843" stroke-width="0.9" stroke-linecap="round">
+          <path d="M8,38 C20,28 32,22 48,26 C54,14 68,10 82,18 C96,12 108,20 112,32 C108,42 96,48 82,44 C70,52 54,50 42,46 C28,50 14,46 8,38 Z" opacity="0.85"/>
+          <path d="M18,42 C30,36 42,34 56,38" stroke="#8b1a1a" stroke-width="0.5" opacity="0.5"/>
+          <path d="M62,30 C74,26 86,28 98,34" stroke="#2f5a4a" stroke-width="0.5" opacity="0.4"/>
+        </g>
+      </symbol>
+      <!-- 剪纸花鸟 -->
+      <symbol id="pattern-papercut-bird" viewBox="0 0 100 100">
+        <g fill="#8b1a1a" fill-opacity="0.15" stroke="#8b1a1a" stroke-width="0.8">
+          <path d="M50,20 C58,32 62,44 50,56 C38,44 42,32 50,20 Z"/>
+          <path d="M50,56 L50,72 M50,56 L34,68 M50,56 L66,68" fill="none"/>
+          <circle cx="50" cy="38" r="3" fill="#d4a843" stroke="none"/>
+          <path d="M22,48 C30,40 38,44 44,52 M78,48 C70,40 62,44 56,52" fill="none" stroke-width="0.6"/>
+          <path d="M30,78 C38,70 46,74 50,82 C54,74 62,70 70,78" fill="none" stroke="#2f5a4a" stroke-width="0.5" opacity="0.6"/>
+        </g>
+      </symbol>
+      <!-- 大型水印圆纹（铜鼓/团花） -->
+      <symbol id="pattern-watermark" viewBox="0 0 100 100">
+        <g fill="none" stroke="#8b1a1a" stroke-width="0.6">
+          <circle cx="50" cy="50" r="46"/>
+          <circle cx="50" cy="50" r="36" stroke-dasharray="2 3"/>
+          <circle cx="50" cy="50" r="26"/>
+          <circle cx="50" cy="50" r="16"/>
+          <path d="M50,4 L50,96 M4,50 L96,50 M16,16 L84,84 M84,16 L16,84" stroke="#d4a843" stroke-width="0.4" opacity="0.5"/>
+          <polygon points="50,10 58,26 50,42 42,26" fill="#d4a843" fill-opacity="0.12" stroke="none"/>
+          <polygon points="50,58 58,74 50,90 42,74" fill="#d4a843" fill-opacity="0.12" stroke="none"/>
+          <polygon points="10,50 26,58 42,50 26,42" fill="#d4a843" fill-opacity="0.12" stroke="none"/>
+          <polygon points="58,50 74,58 90,50 74,42" fill="#d4a843" fill-opacity="0.12" stroke="none"/>
+        </g>
+      </symbol>
+      <!-- 卷草线条 -->
+      <symbol id="pattern-scroll" viewBox="0 0 100 30">
+        <g fill="none" stroke="#2f5a4a" stroke-width="0.8" stroke-linecap="round">
+          <path d="M4,15 C16,4 28,4 40,15 C52,26 64,26 76,15 C84,8 92,8 96,15"/>
+          <path d="M4,20 C16,10 28,10 40,20 C52,28 64,28 76,20" stroke="#d4a843" stroke-width="0.5" opacity="0.6"/>
+          <circle cx="40" cy="15" r="2" fill="#8b1a1a" stroke="none" opacity="0.5"/>
+          <circle cx="76" cy="15" r="2" fill="#8b1a1a" stroke="none" opacity="0.5"/>
+        </g>
+      </symbol>
+      <!-- 苗族几何条带 -->
+      <symbol id="pattern-miao" viewBox="0 0 100 100">
+        <g fill="none" stroke="#2f5a4a" stroke-width="0.7">
+          <path d="M10,20 H90 M10,40 H90 M10,60 H90 M10,80 H90"/>
+          <path d="M20,10 V90 M40,10 V90 M60,10 V90 M80,10 V90"/>
+          <rect x="35" y="35" width="30" height="30" stroke="#8b1a1a" stroke-width="0.6"/>
+          <line x1="35" y1="50" x2="65" y2="50" stroke="#d4a843" stroke-width="0.5"/>
+          <line x1="50" y1="35" x2="50" y2="65" stroke="#d4a843" stroke-width="0.5"/>
+        </g>
+      </symbol>
+      <!-- 剪纸窗花 -->
+      <symbol id="pattern-papercut-window" viewBox="0 0 100 100">
+        <g fill="none" stroke="#8b1a1a" stroke-width="0.9">
+          <rect x="18" y="18" width="64" height="64" rx="2"/>
+          <path d="M18,50 H82 M50,18 V82" stroke="#d4a843" stroke-width="0.6"/>
+          <path d="M32,32 L68,68 M68,32 L32,68" stroke="#2f5a4a" stroke-width="0.5" opacity="0.7"/>
+          <circle cx="50" cy="50" r="8" fill="#d4a843" fill-opacity="0.25" stroke="#8b1a1a"/>
+          <path d="M50,10 L52,18 L50,26 L48,18 Z M50,74 L52,82 L50,90 L48,82 Z M10,50 L18,52 L26,50 L18,48 Z M74,50 L82,52 L90,50 L82,48 Z" fill="#8b1a1a" fill-opacity="0.2" stroke="none"/>
+        </g>
+      </symbol>
+      <!-- 哈尼蕨纹 -->
+      <symbol id="pattern-fern" viewBox="0 0 100 100">
+        <g fill="none" stroke="#2f5a4a" stroke-width="0.85" stroke-linecap="round">
+          <path d="M50,88 Q48,55 50,22 Q52,55 50,88"/>
+          <path d="M50,55 Q35,48 28,38 M50,55 Q65,48 72,38"/>
+          <path d="M50,68 Q38,62 32,54 M50,68 Q62,62 68,54"/>
+          <path d="M50,40 Q40,36 36,28 M50,40 Q60,36 64,28"/>
+          <circle cx="50" cy="22" r="3" fill="#d4a843" stroke="none" opacity="0.7"/>
+        </g>
+      </symbol>
+      <!-- 彝族折线纹 -->
+      <symbol id="pattern-yi-zigzag" viewBox="0 0 100 100">
+        <g fill="none" stroke="#8b1a1a" stroke-width="1" stroke-linejoin="round">
+          <path d="M12,30 L28,50 L12,70 M88,30 L72,50 L88,70"/>
+          <path d="M30,20 L50,40 L70,20 M30,80 L50,60 L70,80" stroke="#d4a843" stroke-width="0.7"/>
+          <path d="M20,50 H80" stroke="#2f5a4a" stroke-width="0.5" opacity="0.6"/>
+          <circle cx="50" cy="50" r="5" fill="#d4a843" fill-opacity="0.3" stroke="#8b1a1a"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <button type="button" class="nav-toggle" aria-label="菜单">
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="story-nav" id="story-nav" aria-label="篇章导航">
+    <button type="button" class="story-nav__item is-active" data-index="0"><span class="story-nav__dot"></span><span class="story-nav__label">封面</span></button>
+    <button type="button" class="story-nav__item" data-index="1"><span class="story-nav__dot"></span><span class="story-nav__label">导语</span></button>
+    <button type="button" class="story-nav__item" data-index="2"><span class="story-nav__dot"></span><span class="story-nav__label">一</span></button>
+    <button type="button" class="story-nav__item" data-index="3"><span class="story-nav__dot"></span><span class="story-nav__label">二</span></button>
+    <button type="button" class="story-nav__item" data-index="4"><span class="story-nav__dot"></span><span class="story-nav__label">三</span></button>
+    <button type="button" class="story-nav__item" data-index="5"><span class="story-nav__dot"></span><span class="story-nav__label">尾声</span></button>
+  </nav>
+  <p class="story-scroll-hint" aria-hidden="true"><span>向下</span>滚轮 / ↑ ↓ 键</p>
+
+  <main class="story-track" id="story-track" tabindex="0">
+<section class="story-panel story-panel--cover" id="panel-cover" aria-label="作品封面">
+      <div class="cover-screen">
+        <header class="hero-banner cover-screen__head">
+          <h1 class="cover-screen__title">逛长街大席</h1>
+          <p class="cover-screen__hook">一站式读懂哈尼衣食乐！</p>
+          <p class="cover-screen__bridge">一场绵延尽五公里的盛宴</p>
+        </header>
+        <div class="cover-screen__cta">
+          <button type="button" class="cover-start-btn" id="cover-start-btn" aria-label="开始阅读">
+            <span class="cover-start-btn__label">开始阅读</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-panel story-panel--chapter" id="panel-intro" aria-label="导语">
+      <div class="story-panel__scroll">
+        <div class="page">
+    <section class="intro">
+      <span class="intro-label">导语</span>
+      <p>
+        每年农历十月，云南红河南岸的哀牢山深处，数千张方桌沿县城主干道一字排开，绵延近五公里，身着盛装的哈尼族群众与来自四面八方的宾客围桌而坐，同饮焖锅酒，共食梯田鱼。这不是一场普通的聚餐，而是哈尼族最隆重的节庆——<em>长街宴</em>。
+      </p>
+    </section>
+
+    <p class="chart-caption">图表：数字看板 2.0 中"核心规模指标"</p>
+
+    <section class="dashboard" aria-label="核心规模指标">
+      <h2 class="dashboard-title">六、核心规模指标</h2>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-value">4065</div>
+          <div class="metric-label">历史最大桌数</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">4980米</div>
+          <div class="metric-label">最长宴席长度</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">3510</div>
+          <div class="metric-label">近三年均桌数</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">12.2万</div>
+          <div class="metric-label">年均参与人次</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="content-block">
+        <p>
+          据红河州官方统计，2025 年绿春县十月年长街宴开席
+          <span class="highlight-gold">3265 桌</span>，参与人数达
+          <span class="highlight-gold">13 万人次</span>。
+        </p>
+        <p class="content-divider">从 2004 年以 2041 桌创下吉尼斯"天下最长宴席"</p>
+        <p>
+          到如今稳定在三千桌以上，这一古老的民俗正从村寨走向世界。长街宴不是小众活动，而是
+          <span class="highlight-red">区域性超大规模群体性民俗公共活动</span>，具备极强的社群聚合能力。
+        </p>
+      </div>
+
+      <div class="content-block">
+        <p>
+          本文通过民俗、饮食、服饰、歌舞四个维度的数据与解读，呈现长街宴如何成为
+          <span class="highlight-gold">哈尼族文化</span>的集中载体，以及多民族
+          <span class="highlight-red">共庆、共享、共融</span>的生动样本。
+        </p>
+        <div class="dimensions">
+          <span class="dimension-tag">民俗</span>
+          <span class="dimension-tag">饮食</span>
+          <span class="dimension-tag">服饰</span>
+          <span class="dimension-tag">歌舞</span>
+        </div>
+      </div>
+    </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-panel story-panel--chapter" id="panel-act1" aria-label="第一幕">
+      <div class="story-panel__scroll">
+  <article class="page article-block act-two" aria-label="第一幕 衣上长街">
+    <header class="act-one-header">
+      <span class="act-number">第一幕</span>
+      <h2 class="act-one-title">衣上长街</h2>
+    </header>
+
+    <p class="article-p article-p--lead">踏入这绵延五公里的长街，人潮涌动，衣袂飘飘。最先撞入眼帘的是流动的锦绣。哈尼族人把没有写下的历史，全都绣进了衣角。在束光展台下，19种传统纹样构成了一部穿在身上的「无字史书」。</p>
+
+    <section class="cloth-section" aria-labelledby="cloth-traditional-heading">
+      <h3 class="cloth-section__label" id="cloth-traditional-heading">第一节 · 传统纹样</h3>
+      <p class="article-subtitle">纹藏万象：衣角上的无字史书</p>
+      <p class="article-p">一个没有文字的民族，用针线创造了一套语言。每一个形状都是一个词汇，组合起来就可以讲述迁徙、劳作、感恩、祈愿。他们把最复杂的情感，装进最简单的形状里。</p>
+
+      <div class="pattern-showcase pattern-showcase--catalog" id="pattern-catalog-traditional" aria-label="传统纹样图鉴"></div>
+
+      <section class="age-outfit" id="age-outfit" aria-label="不同年龄段穿搭图集">
+        <h4 class="article-h4">不同年龄段穿搭</h4>
+        <div class="age-outfit__stage">
+          <button type="button" class="age-outfit__nav age-outfit__nav--prev" aria-label="上一组">‹</button>
+          <div class="age-outfit__viewport">
+            <div class="age-outfit__track"></div>
+          </div>
+          <button type="button" class="age-outfit__nav age-outfit__nav--next" aria-label="下一组">›</button>
+        </div>
+        <div class="age-outfit__tabs">
+          <button type="button" class="age-outfit__tab is-active" data-index="0">男子</button>
+          <button type="button" class="age-outfit__tab" data-index="1">儿童</button>
+          <button type="button" class="age-outfit__tab" data-index="2">青年女子</button>
+          <button type="button" class="age-outfit__tab" data-index="3">已婚妇女</button>
+          <button type="button" class="age-outfit__tab" data-index="4">老年妇女</button>
+        </div>
+        <p class="age-outfit__hint">左右滑动 · 点击标签切换年龄段</p>
+      </section>
+
+      <ol class="article-list article-list--age">
+        <li><strong>哈尼族男子</strong>——各地各支系大体相同，一般着对襟上衣、宽松长裤。男子头饰、服装装饰均简单，头缠包头，身穿布衣而已，最多银币作扣，以为装饰。</li>
+        <li><strong>哈尼儿童</strong>——不分男女，装饰在头，在自制的小布帽上钉有猪牙、海贝、银泡、银钱、虎豹牙、穿山甲鳞壳等饰物。</li>
+        <li><strong>少女及年轻姑娘</strong>——编辫下垂，头缠包头，包头上饰以红线或成排银泡，衣襟、衣边、袖口、裤脚边镶绣彩色花边，佩戴银耳环、耳坠和项圈，胸饰以银链、成片银泡和成串银币，手腕戴银镯。</li>
+        <li><strong>已婚和生育后的妇女</strong>——编独辫和双辫盘于头顶，覆盖包头巾，服装上银饰渐少，前襟、衣边、袖口、裤脚边仍镶绣彩色花边。</li>
+        <li><strong>老年妇女</strong>——辫发盘顶，衣着朴素，几近全黑，无花边少银饰。</li>
+      </ol>
+
+      <p class="article-p cloth-section__bridge">这些纹样不只是装饰，更是哈尼族集体记忆的「公共档案」。当文旅消费开始青睐有文化厚度的符号，原本只在村寨内部传承的视觉语言，第一次具备了面向外部市场的讲述能力——非遗由此获得走出小众圈层的原始资本，也为少数民族乡村依托文化资源发展致富埋下伏笔。</p>
+    </section>
+
+    <section class="cloth-section" aria-labelledby="cloth-innovation-heading">
+      <h3 class="cloth-section__label" id="cloth-innovation-heading">第二节 · 创新纹样</h3>
+      <p class="article-subtitle">破圈焕新：老图腾撞上现代审美</p>
+      <p class="article-p">当哈尼纹样走出哀牢山的云雾，首先要跨过的，是「传统」与「现代」的审美鸿沟。那些曾在麻布上沉默了千百年的云雷纹、蕨纹，如今正经历着一场静默的变形：原本铺满衣角的繁复图案，被收敛为袖口领边的一抹精致点缀，适配现代成衣的极简剪裁；老图腾不再是博物馆里的标本，而是正在被现代审美重新翻译的「无字史书」。</p>
+      <div class="pattern-showcase pattern-showcase--slider" id="pattern-slider-innovation" aria-label="创新纹样滑廊"></div>
+      <p class="article-p cloth-section__bridge">审美转译，是非遗从「遗产」走向「商品」的关键一步。当传统纹样适配现代成衣与生活方式，它便不再只是节庆里的短暂亮相，而成为日常可见、可购、可传播的文旅消费品。这种「看得懂、穿得出去」的创新，既降低了大众接受门槛，也让手艺人、设计师与村集体在产业链中获得持续收益，真正实现文化价值与经济价值的同频共振。</p>
+    </section>
+
+    <section class="cloth-section" aria-labelledby="cloth-cultural-heading">
+      <h3 class="cloth-section__label" id="cloth-cultural-heading">第三节 · 文创产品</h3>
+      <p class="article-subtitle">纹样出圈：从山野到生活的万物流转</p>
+      <p class="article-p">纹样的生命力，落点在「用得上、带得走」的日常。</p>
+      <p class="article-p">抱枕上，菱形纹样泛着柔光；杯垫、编织袋、冰箱贴、明信片……每一件都成了可携带的「哈尼记忆」。</p>
+      <p class="article-conclusion">而每一次消费，都在反哺土地</p>
+      <div class="pattern-showcase pattern-showcase--shelf" id="pattern-shelf-cultural" aria-label="文创产品图廊"></div>
+      <p class="article-p cloth-section__bridge">一条纹样从衣角走到抱枕、杯垫、冰箱贴，本质上是一条「乡村—城市—全球」的价值链条被打通。轻量化、可携带的文创产品，让哈尼文化以更低门槛进入大众文旅消费场景；而消费回流又直接反哺传承人培养、村落公共建设与民俗活动存续，使少数民族乡村得以在不脱离自身文化根脉的前提下，走出一条靠「民俗 IP」自我造血的共富路径。</p>
+    </section>
+    <p class="article-p article-p--bridge-next">读懂了衣角的纹样，视线便顺着那斑斓的色彩向下延伸。当镜头从刺绣移向桌面，一股更浓烈的烟火气扑面而来——那是焖锅酒与蘸水鸡的醇香，正牵引着我们走向这场盛宴的下一个篇章。</p>
+  </article>
+      </div>
+    </section>
+
+    <section class="story-panel story-panel--chapter" id="panel-act2" aria-label="第二幕">
+      <div class="story-panel__scroll">
+  <article class="page article-block act-three" aria-label="第二幕 舌尖长街">
+    <header class="act-one-header">
+      <span class="act-number">第二幕</span>
+      <h2 class="act-one-title">舌尖长街</h2>
+    </header>
+
+    <h3 class="article-h3">第一节 · 入席·飨食录</h3>
+    <p class="article-p">长街宴不只满足口腹之欲，更是社会关系的一场「展演」。理解宴席礼仪，需同时看两条轴：<strong>空间轴</strong>划定座次（龙头主桌 → 宾客席 → 晚辈席）；<strong>时间轴</strong>串联流程（迎宾 → 分福肉 → 敬酒 → 布菜 → 散席）。其中「分福肉」为核心仪式，象征福气在代际间的传递。</p>
+
+    <figure class="figure-block">
+      <div class="embed-frame-wrap embed-frame-wrap--figure">
+        <iframe class="embed-frame" src="长街宴礼仪时空双轴图.html" title="长街宴礼仪流程·时空双轴图" loading="lazy" scrolling="no"></iframe>
+      </div>
+      <figcaption class="figure-caption">图 1：长街宴礼仪流程·时空双轴图</figcaption>
+      <p class="article-note">图注：本图据学术调研《哈尼族长街宴的共食行为与社群意识》及红河哈尼族彝族自治州人民政府「昂玛突」节庆档案整理。空间轴呈现「长辈—成人—儿童」三级座次；时间轴串联迎宾、分福肉、敬酒、布菜、散席五项核心礼仪。</p>
+    </figure>
+
+    <h4 class="article-h4">空间轴 · 席位分区</h4>
+    <ul class="article-list">
+      <li><strong>龙头主桌（红）</strong>——长辈居首，桌首设龙首装饰</li>
+      <li><strong>宾客席（橙）</strong>——中青年宾客</li>
+      <li><strong>晚辈席（绿）</strong>——孩童与晚辈</li>
+    </ul>
+
+    <h4 class="article-h4">时间轴 · 礼仪五环节</h4>
+    <ol class="article-list article-list--patterns">
+      <li><strong>迎宾礼</strong>——主人列队迎候；收拦门酒；赠七彩糯米饭</li>
+      <li><strong>分福肉</strong>——选福肉（首刀）；主人亲自分肉；按长幼次序分发；寓意分福共享</li>
+      <li><strong>敬酒礼</strong>——先敬长辈；依序敬酒；双手持杯；口诵祝福；以焖锅酒表敬意</li>
+      <li><strong>布菜礼</strong>——依序上菜；特色菜逐道呈献；菜名寓意吉祥；主人为宾客添菜</li>
+      <li><strong>散席礼</strong>——主人送客；互道珍重；赠豆豉等伴手礼</li>
+    </ol>
+
+    <p class="article-p">五大环节依次为迎宾、分肉、敬酒、布菜、散席。「分福肉」为核心仪式——祭祀用猪经长辈分赠宾客与晚辈，寓意福分流转与代际感恩。</p>
+
+    <figure class="figure-block figure-block--ring">
+      <div class="ring-ritual" id="ring-ritual">
+        <p class="ring-ritual__hint">悬停或点击外环五礼 · 可查看仪式说明</p>
+        <div class="ring-ritual__chart" id="ring-ritual-chart">
+          <img class="ring-ritual__img" src="image/美食/环形礼仪图/长街宴礼仪流程·时空双轴图.png" alt="尊老爱幼 · 长幼有序 — 长街宴环形礼仪图" width="728" height="686" />
+          <svg class="ring-ritual__svg" viewBox="0 0 728 686" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g class="ring-ritual__zone" tabindex="0" role="button" aria-label="迎宾礼" data-tip="迎宾礼|村口迎客，互道祝福"><circle class="ring-ritual__hit" cx="356" cy="108" r="62"/></g>
+            <g class="ring-ritual__zone" tabindex="0" role="button" aria-label="分福肉" data-tip="分福肉|重点标注：长辈优先，福泽绵长"><circle class="ring-ritual__hit" cx="575" cy="268" r="62"/></g>
+            <g class="ring-ritual__zone" tabindex="0" role="button" aria-label="敬酒礼" data-tip="敬酒礼|晚辈向长辈敬酒，表达感恩"><circle class="ring-ritual__hit" cx="500" cy="535" r="62"/></g>
+            <g class="ring-ritual__zone" tabindex="0" role="button" aria-label="布菜礼" data-tip="布菜礼|长者优先享用，共享佳肴"><circle class="ring-ritual__hit" cx="212" cy="535" r="62"/></g>
+            <g class="ring-ritual__zone" tabindex="0" role="button" aria-label="散席礼" data-tip="散席礼|互赠伴手礼，依依惜别"><circle class="ring-ritual__hit" cx="137" cy="268" r="62"/></g>
+          </svg>
+        </div>
+        <div class="ring-ritual__panel" id="ring-ritual-panel" aria-live="polite">
+          <strong class="ring-ritual__panel-title">尊老爱幼 · 长幼有序</strong>
+          <p class="ring-ritual__panel-desc">点击或悬停上方任一礼仪节点，查看该环节说明。</p>
+        </div>
+        <div class="ring-ritual__tooltip" id="ring-ritual-tooltip" role="tooltip" hidden></div>
+      </div>
+      <figcaption class="figure-caption">图 2：尊老爱幼 · 长幼有序（环形礼仪图）</figcaption>
+      <p class="article-note">中心圈层为龙头/长辈 → 成年人/中青年 → 儿童/晚辈；外环顺时针流转迎宾、分福肉、敬酒、布菜、散席五礼。</p>
+    </figure>
+
+    <h3 class="article-h3">十二道风味，道道有来头</h3>
+    <p class="article-p">长街宴有相对固定的十二道招牌菜（七彩糯米饭、梯田鱼、牛肉干巴等），每一道都对应一个农耕场景或劳作周期——如梯田鱼对应夏秋稻鱼共作，把「吃什么」与「何时种、何时收」绑在一起。</p>
+
+    <div class="embed-frame-wrap">
+      <iframe class="embed-frame" src="embed-food.html?view=twelve" title="长街宴十二道美食及对应农耕场景与劳作周期" loading="lazy" scrolling="no"></iframe>
+    </div>
+    <p class="article-note">参见郑宇《民族节庆文化研究》、张禀磊《哈尼长街宴的现代再造》等。</p>
+
+    <h3 class="article-h3">食材从哪来？森林、梯田、市集的生态链</h3>
+    <p class="article-p">长街宴食材来自三重生态：<strong>森林</strong>提供「自然馈赠」——野菌、蜂蛹等；<strong>梯田</strong>提供「耕作根基」——红米、田鱼；<strong>市集</strong>提供「必要物资」——盐、酒曲。林—梯—市构成完整的乡土供给链。</p>
+
+    <div class="embed-frame-wrap">
+      <iframe class="embed-frame" src="长街宴食材来源构成.html" title="长街宴食材来源构成" loading="lazy" scrolling="no"></iframe>
+    </div>
+
+    <h3 class="article-h3">哪些上桌，哪些不上？背后有讲究</h3>
+    <p class="article-p">总结「信仰逻辑」：家畜类（鸡、鸭、螺、黄鳝）因「不洁」或寓意歧义不上席；山林野味（竹鸡、山鸡、蜂蛹、野菌）因「野气」「珍贵」而成为祭献与宴席主角。</p>
+
+    <div class="embed-frame-wrap">
+      <iframe class="embed-frame" src="embed-food.html?view=taboo" title="禁忌类与可上席类" loading="lazy" scrolling="no"></iframe>
+    </div>
+    <p class="article-note">图注：本图依据郑宇《哈尼族长街宴饮食的人类学阐释》整理。</p>
+
+    <h3 class="article-h3">美食如何变成「钱」？真实数据看经济带动</h3>
+    <p class="article-p">美食消费反哺乡村振兴。「稻鱼鸭」模式下梯田亩产值由约 2000 元升至 8000 元以上。2025 年绿春长街宴接待游客 10.35 万人次，旅游收入 1.12 亿元，带动 10953 户农户增收。</p>
+
+    <div class="embed-frame-wrap">
+      <iframe class="embed-frame" src="长街宴食材产业链.html" title="长街宴食材产业链" loading="lazy" scrolling="no"></iframe>
+    </div>
+
+    <h4 class="article-h4">数据来源</h4>
+    <ol class="article-list article-list--patterns">
+      <li><strong>梯田亩产值提升</strong>——「稻鱼鸭」模式下，亩产值由「单种红米（约 2000 元）」升至 8000 元以上，亩均净增约 4000 元。<br><span class="source-ref">来源：红河州人民政府官网《元阳：千年哈尼梯田的致富密码》<a href="https://www.hh.gov.cn/info/1043/252411.htm" target="_blank" rel="noopener">hh.gov.cn/info/1043/252411.htm</a></span></li>
+      <li><strong>旅游与消费拉动</strong>——2025 年绿春长街宴接待游客 10.35 万人次，旅游总消费 1.12 亿元，特色农产品销售 427.35 万元。<br><span class="source-ref">来源：2025 绿春哈尼十月年长街宴火爆出圈 · 文旅头条</span></li>
+      <li><strong>产业带动与增收</strong>——红河州推广「稻鱼鸭」模式，累计带动 10953 户建档立卡贫困农户，户均年增收 2000 元以上。<br><span class="source-ref">来源：红河州人民政府官网<a href="https://www.hh.gov.cn/info/1043/167051.htm" target="_blank" rel="noopener">hh.gov.cn/info/1043/167051.htm</a></span></li>
+    </ol>
+
+    <p class="article-quote-lg">「吃完了？别走，宴席散了，歌舞才刚开始。」</p>
+
+    <h3 class="article-h3">第二节 · 宴罢·舞乐作</h3>
+
+    <p class="article-p">宴席最震撼的灵魂，永远在放下饭碗的那一刻。</p>
+    <p class="article-p">长街宴是「口腹的团圆」，而乐作舞是「精神的共鸣」——云南红河乐作舞传承人 杨钰尼</p>
+
+    <figure class="figure-block act-media">
+      <video controls playsinline preload="metadata" src="image/第四幕素材/长街宴.mp4" title="长街宴视频"></video>
+    </figure>
+
+    <p class="article-p">长街宴的完整仪式永远是<span class="text-accent">长街宴+万人乐作舞</span>。</p>
+    <p class="article-p">美食敬天地拉近距离，舞步暖人心固化温情。有宴有舞，才是完整的团圆。它没有复杂的招式门槛，不讲身份、不分民族、不论年龄。</p>
+    <p class="article-quote-lg">它是扎根哈尼梯田烟火、流淌在滇南大地的全民团圆之舞。</p>
+
+    <figure class="figure-block act-media">
+      <video controls playsinline preload="metadata" src="image/第四幕素材/乐作舞.mp4" title="乐作舞视频"></video>
+    </figure>
+
+    <h4 class="article-h4">1. 什么是乐作舞？</h4>
+    <p class="article-p">乐作舞是扎根哈尼梯田烟火、流淌在滇南大地的全民团圆之舞，是哈尼族、彝族两族同胞世代共生、交融孕育的国家级非遗民间舞蹈。</p>
+    <p class="article-p">没有复杂的招式门槛，不用专业的舞蹈功底，不讲身份、不分民族、不论年龄。它的每一个舞步都源自山间梯田的农耕日常，每一段律动都藏着山野自然的节奏。</p>
+    <p class="article-quote-lg">乐作舞是跳给生活、跳给团圆、跳给美好的舞蹈。</p>
+    <p class="article-keywords"><span class="kw">众人同乐</span><span class="kw">携手而作</span></p>
+    <p class="article-hani" lang="ii">ꋍꏅꉌꇿ &nbsp; ꇇꐯꌫꄉꃅ</p>
+
+    <div class="act-media-grid act-media-grid--2">
+      <img src="image/第四幕素材/素材5.jpg" alt="乐作舞舞台表演" loading="lazy">
+      <img src="image/第四幕素材/素材6.jpg" alt="乐作舞户外群舞" loading="lazy">
+    </div>
+    <p class="article-note">图源：红河县融媒体中心 梦想红河</p>
+
+    <div class="act-media-grid act-media-grid--2">
+      <img src="image/第四幕素材/素材10.jpg" alt="民族巡游吹号表演" loading="lazy">
+      <img src="image/第四幕素材/素材12.jpg" alt="乐作舞街头群舞" loading="lazy">
+    </div>
+    <p class="article-note">图源：红河县融媒体中心 梦想红河</p>
+
+    <h4 class="article-h4">2. 乐作舞组合形式</h4>
+    <p class="article-p">乐作舞的组合和流动，全都是以「偶数」模式进行，如双人成对、四人成组。</p>
+    <p class="article-p">在传统文化里，万物皆有对应——天地、山水、日月、你我。</p>
+    <p class="article-quote-lg">孤则寡、双则和</p>
+    <p class="article-p"><span class="text-accent">双人成对是邻里温情，四人成组是户户相依的团结力量</span></p>
+    <p class="article-p">在乐作舞的节拍里，没有本地人与外地人之分，没有身份与层级之差，碎片化的个体瞬间凝聚成了一个温暖的共同体。</p>
+
+    <h4 class="article-h4">3. 活化乐作舞</h4>
+    <p class="article-quote-lg">非遗不进博物馆，要活在当下、火在民间</p>
+    <p class="article-cite">——云南红河乐作舞传承人 杨钰尼</p>
+    <p class="article-p">文旅融合绝不是消费非遗，而是非遗最好的当代出路。它不仅让传统乐作舞与现代律动、国风美学融合，登上更大的舞台；更重要的是，它带动了乡村民宿、特色餐饮、非遗文创的发展，让无形的舞蹈变成了能带动群众增收、助力乡村振兴的有形产业。</p>
+    <p class="article-p text-accent">流量带来关注，关注带来保护，让千年舞步在新时代持续生根发芽。</p>
+
+    <div class="act-media-grid act-media-grid--2">
+      <img src="image/第四幕素材/素材7.jpg" alt="传承人带领儿童习舞" loading="lazy">
+      <img src="image/第四幕素材/素材8.jpg" alt="钰尼文化传承现场" loading="lazy">
+    </div>
+    <p class="article-note">图源：绿春青年</p>
+
+    <figure class="figure-block act-media">
+      <video controls playsinline preload="metadata" src="image/第四幕素材/传承文化.mp4" title="传承文化视频"></video>
+    </figure>
+
+    <p class="article-p">双人成对，是人与人的温情相拥；多偶成圆，是各民族的同心相聚。一拉手，便是山海相拥；一共舞，便是同心同源。脚下的舞步是非遗的传承，手心的温度是团结的力量。</p>
+    <p class="article-keywords"><span class="kw">各民族要像石榴籽一样紧紧抱在一起</span></p>
+    <p class="article-hani" lang="ii">ꊿꋅꈁꐥꌠꆹꌧꑗꂶꂶꂷꌟꃅꏟꈯꀕꃅꐮꄌ</p>
+
+    <div class="act-media-grid act-media-grid--2">
+      <img src="image/第四幕素材/素材9.jpg" alt="长街宴后万人圈舞夜景" loading="lazy">
+      <img src="image/第四幕素材/素材11.jpg" alt="夜间民族巡游队伍" loading="lazy">
+    </div>
+    <p class="article-note">图源：红河县融媒体中心 梦想红河</p>
+  </article>
+      </div>
+    </section>
+
+    
+
+        <section class="story-panel story-panel--chapter" id="panel-act3" aria-label="第三幕">
+      <div class="story-panel__scroll">
+<article class="page article-block act-one" aria-label="第三幕 何以长街 · 第一节">
+    <header class="act-one-header">
+      <span class="act-number">第三幕</span>
+      <h2 class="act-one-title">何以长街</h2>
+      <p class="act-one-question">核心问题：长街宴规模逐年暴涨，是单纯旅游热度驱动，还是乡村产业转型的综合结果？</p>
+    </header>
+
+    <h3 class="article-h3">第一节 · 长街宴持续扩容的底层密码</h3>
+    <h4 class="article-h4">1. 三大固定节庆时间</h4>
+    <div class="festival-grid" aria-label="三大固定节庆">
+      <div class="festival-card">
+        <strong>昂玛突（祭寨神）</strong>
+        <span class="festival-card__hani" lang="ii">ꉣꂷꉂ</span>
+        <span>农历十二月第一个属牛日</span>
+      </div>
+      <div class="festival-card">
+        <strong>矻扎扎（六月年）</strong>
+        <span class="festival-card__hani" lang="ii">ꆏꀋꇁ</span>
+        <span>农历五月农闲时节</span>
+      </div>
+      <div class="festival-card">
+        <strong>十月年（扎勒特）</strong>
+        <span class="festival-card__hani" lang="ii">ꊰꆨꈎ</span>
+        <span>农历十月第一个属龙日（规模最大）</span>
+      </div>
+    </div>
+
+    <div class="chart-block">
+      <p class="chart-caption-inner">配套图表 1：三大节庆属性占比饼图</p>
+      <p class="chart-title">三大节庆属性占比</p>
+      <div class="chart-canvas-wrap chart-canvas-wrap--echarts">
+        <div class="chart-echarts" id="chart-festival-pie" role="img" aria-label="三大节庆属性占比饼图"></div>
+      </div>
+    </div>
+
+    <p class="article-conclusion"><strong>数据分析结论：</strong>十月年占节庆规模 45%，是唯一对外开放、适配文旅开发的原生宴席，为规模化发展提供民俗基础。</p>
+    <p class="article-summary"><strong>小结：</strong>传统村寨小型祭祀宴席，在非遗政策与乡村文旅叠加下完成规模裂变，节庆扩张背后关联乡村经济系统性变革。</p>
+
+    <h3 class="article-h3">2. 传统长街宴与城镇文旅长街宴有什么区别</h3>
+    <h4 class="article-h4">传统村寨长街宴原始规模数据</h4>
+    <p class="article-note">注：昂玛突、苦扎扎、普通十月年、起源村（甲寅咪田）的桌数、参与人数区间见下图。</p>
+    <p class="article-p text-accent">特征：封闭祭祀 · 本地参与为主 · 无商业开发 · 规模稳定无暴涨</p>
+
+    <div class="chart-block">
+      <p class="chart-caption-inner">配套图表 2：四类村寨宴席桌数 &amp; 参与人数双轴箱线图</p>
+      <p class="chart-title">哈尼族各村寨长街宴桌数 &amp; 参与人数规模对比</p>
+      <div class="chart-canvas-wrap chart-canvas-wrap--echarts">
+        <div class="chart-echarts" id="chart-village-box" role="img" aria-label="村寨长街宴规模对比"></div>
+      </div>
+      <p class="chart-legend-hint" id="chart-village-box-hint">点击图例即可查看单项数据</p>
+    </div>
+
+    <p class="article-conclusion"><strong>数据分析结论：</strong>原生村寨宴席规模常年稳定，人数浮动区间极小，不存在逐年暴涨特征，证明单纯民俗内生增长无法解释规模扩张。</p>
+
+    <h4 class="article-h4">城镇集中式长街宴发展历程数据——以绿春县为例</h4>
+    <ul class="article-list">
+      <li><strong>起步节点：</strong>2004 年吉尼斯元年基础数据（2041 桌、3 万人次）。</li>
+      <li><strong>近三年（2023—2025）核心量化指标：</strong>桌数、宴席长度、参与游客总量。</li>
+    </ul>
+
+    <div class="chart-block">
+      <p class="chart-caption-inner">配套图表 3：绿春历年桌数、宴席长度、参与人次横向对比柱状图</p>
+      <p class="chart-title">绿春长街宴历年桌数与参与人次</p>
+      <div class="chart-canvas-wrap chart-canvas-wrap--echarts" id="chart-luchun-bars"></div>
+      <p class="chart-legend-hint" id="chart-luchun-bars-hint">点击图例即可查看单项数据</p>
+    </div>
+
+    <p class="article-conclusion"><strong>数据分析结论：</strong>2004 至 2025 年参与人次增长超 4 倍，规模持续走高，增长曲线与当地文旅产业扶持周期高度重合，规模扩张与旅游开发强绑定。</p>
+
+    <h3 class="article-h3">3. 长街宴为什么火</h3>
+    <h4 class="article-h4">近三年游客人次波动变化</h4>
+
+    <div class="chart-block chart-block--light">
+      <p class="chart-caption-inner">图表 4：2023—2025 参与人次折线图</p>
+      <p class="chart-title">绿春县十月年长街宴近三年参与人次变化（2023—2025）</p>
+      <div class="chart-canvas-wrap chart-canvas-wrap--line">
+        <canvas id="chart-visitor-line" aria-label="参与人次折线图"></canvas>
+      </div>
+    </div>
+
+    <p class="article-conclusion"><strong>数据分析结论：</strong>年均参与人次稳定 12.21 万，旅游客流持续输入，是规模扩张的直接表层推力。</p>
+
+    <h4 class="article-h4">乡村产业转型深层支撑</h4>
+    <ul class="article-list">
+      <li><strong>产业链配套：</strong>梯田红米、稻花鱼、山野菜、民族刺绣、民宿餐饮依托节庆增收。</li>
+      <li><strong>城乡双轨模式：</strong>村寨保留古礼、县城承接文旅消费，形成非遗保护+经济增收闭环。</li>
+      <li><strong>地域分布分层：</strong>原生传承区、辐射区、景区复刻区发展差异。</li>
+    </ul>
+    <p class="article-p">哈尼族长街宴（哈尼语：资乌夺、知交把）原生核心流传区为云南省红河哈尼族彝族自治州红河南岸哀牢山哈尼聚居带，以元阳、红河、绿春、金平四县为原生主体，依昂玛突（祭寨神）、矻扎扎（六月年）、十月年三类节庆形成差异化县域分布，近现代向外辐射至普洱墨江、建水局部哈尼村寨。近 20 年随非遗旅游开发，红河州蒙自市、个旧市城区文旅景区人为复刻长街宴。</p>
+
+    <div class="chart-block">
+      <p class="chart-caption-inner">配套图表 5：长街宴地域分布占比饼图</p>
+      <p class="chart-title">长街宴地域分布占比</p>
+      <div class="chart-canvas-wrap chart-canvas-wrap--echarts">
+        <div class="chart-echarts" id="chart-region-donut" role="img" aria-label="长街宴地域分布占比饼图"></div>
+      </div>
+    </div>
+
+    <p class="article-conclusion"><strong>数据分析结论：</strong>红河四县依托本土梯田产业支撑大型节庆，无本土农业、文旅配套的复刻景区无法形成稳定大规模宴席，证明产业基底才是规模持续扩容的底层条件。</p>
+
+    <h4 class="article-h4">节庆促进乡村文旅经济增长</h4>
+    <p class="article-conclusion"><strong>交叉数据综合研判：</strong>仅旅游客流只能带来短期人次波动；梯田农耕产业、非遗文创、乡村住宿餐饮完整产业链，才支撑长街宴常年大规模举办。</p>
+    <p class="article-conclusion">规模暴涨不是单一游客涌入，是非遗活化政策、梯田农业升级、全域文旅开发共同驱动的乡村产业转型结果。</p>
+    <p class="article-summary"><strong>价值总结：</strong>长街宴规模扩张实现双向正向循环——非遗仪式完整活态传承，同时带动村寨居民持续增收，初步印证文旅转型赋能非遗与乡村振兴。</p>
+
+    <h3 class="article-h3">第二节 · 非遗刻度</h3>
+    <div class="petal-gauge" id="petal-gauge" aria-label="非遗刻度五维花瓣">
+      <div class="petal-gauge__stage">
+        <svg class="petal-gauge__svg" viewBox="0 0 360 360" role="img" aria-label="五个维度花瓣示意，无数值">
+          <defs>
+            <!-- 花瓣路径：自花心向外的水滴形 -->
+            <path id="petal-shape" d="M0,8 C18,-18 38,-72 0,-118 C-38,-72 -18,-18 0,8 Z"/>
+            <radialGradient id="petal-grad-xl" cx="35%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#c45c4a"/>
+              <stop offset="55%" stop-color="#8b1a1a"/>
+              <stop offset="100%" stop-color="#5c1010"/>
+            </radialGradient>
+            <radialGradient id="petal-grad-md" cx="35%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#6a9a7a"/>
+              <stop offset="55%" stop-color="#2f5a4a"/>
+              <stop offset="100%" stop-color="#1e3d32"/>
+            </radialGradient>
+            <radialGradient id="petal-grad-sm" cx="35%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#e8c56a"/>
+              <stop offset="55%" stop-color="#c9a048"/>
+              <stop offset="100%" stop-color="#8a6a28"/>
+            </radialGradient>
+            <radialGradient id="petal-core-grad" cx="40%" cy="35%" r="70%">
+              <stop offset="0%" stop-color="#fff6e0"/>
+              <stop offset="100%" stop-color="#d4a843"/>
+            </radialGradient>
+          </defs>
+
+          <g class="petal-gauge__flower" transform="translate(180 180)">
+            <!-- 按大小：大瓣在下、小瓣在上，围成一朵花；无数值、无网格 -->
+            <g class="petal petal--xl" transform="rotate(0) scale(1.12)">
+              <use href="#petal-shape" fill="url(#petal-grad-xl)"/>
+            </g>
+            <g class="petal petal--xl" transform="rotate(72) scale(1.12)">
+              <use href="#petal-shape" fill="url(#petal-grad-xl)"/>
+            </g>
+            <g class="petal petal--md" transform="rotate(144) scale(0.92)">
+              <use href="#petal-shape" fill="url(#petal-grad-md)"/>
+            </g>
+            <g class="petal petal--sm" transform="rotate(216) scale(0.62)">
+              <use href="#petal-shape" fill="url(#petal-grad-sm)"/>
+            </g>
+            <g class="petal petal--sm" transform="rotate(288) scale(0.62)">
+              <use href="#petal-shape" fill="url(#petal-grad-sm)"/>
+            </g>
+
+            <circle class="petal-gauge__core" cx="0" cy="0" r="28" fill="url(#petal-core-grad)"/>
+            <circle cx="0" cy="0" r="28" fill="none" stroke="#8b1a1a" stroke-width="1.5"/>
+            <text class="petal-gauge__core-text" x="0" y="6" text-anchor="middle">非遗</text>
+          </g>
+
+          <!-- 仅维度名称，无数值 -->
+          <g class="petal-gauge__labels">
+            <text x="180" y="28" text-anchor="middle">文旅经济</text>
+            <text x="330" y="130" text-anchor="middle">社会价值</text>
+            <text x="285" y="318" text-anchor="middle">生态关联</text>
+            <text x="85" y="300" text-anchor="middle">历史底蕴</text>
+            <text x="35" y="130" text-anchor="middle">艺术审美</text>
+          </g>
+        </svg>
+      </div>
+      <p class="petal-gauge__legend">花瓣大小示意强弱：文旅经济、社会价值最大；艺术审美、历史底蕴最小。</p>
+      <p class="petal-gauge__note">经济价值跑在前面，文化挖掘还在路上——这也是我们做这篇报道的原因。</p>
+    </div>
+
+    <section class="memory-poster" id="memory-poster" aria-label="个性化记忆海报">
+      <h3 class="memory-poster__heading">个性化记忆海报</h3>
+      <p class="memory-poster__intro">结合本次数据观察，选择你最关注的长街宴文化维度，生成专属文化观察纪念卡</p>
+      <div class="memory-poster__options">
+        <button type="button" class="memory-poster__option is-active" data-key="food">梯田农耕食俗</button>
+        <button type="button" class="memory-poster__option" data-key="costume">哈尼服饰非遗</button>
+        <button type="button" class="memory-poster__option" data-key="dance">多民族共舞仪式</button>
+        <button type="button" class="memory-poster__option" data-key="tourism">乡村文旅发展</button>
+      </div>
+      <button type="button" class="memory-poster__generate">生成纪念卡</button>
+      <div class="memory-poster__preview">
+        <h4 class="memory-poster__card-title">梯田农耕食俗</h4>
+        <p class="memory-poster__card-line">从七彩饭到梯田鱼，每一口都是哈尼生态观的味觉翻译。</p>
+        <p class="memory-poster__card-score">关注维度：饮食 · 礼仪 · 产业链</p>
+        <p class="memory-poster__footer">哈尼长街宴 · 数据新闻观察纪念卡</p>
+      </div>
+    </section>
+  </article>
+      </div>
+    </section>
+
+<section class="story-panel story-panel--chapter story-panel--end" id="panel-end" aria-label="尾声">
+      <div class="story-panel__scroll">
+  <footer>
+    <p>哈尼长街宴 · 数字看板 2.0</p>
+    <p class="footer-ethnic">千年梯田 · 一席长街 · 万家同乐</p>
+  </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

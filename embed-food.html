@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长街宴 · 美食</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Noto Sans SC',sans-serif;color:#3d2b1f}
+.embed-pane{display:none}
+.embed-pane.is-active{display:block}
+/* taboo */
+.taboo .container{max-width:1140px;margin:0 auto;padding:30px 20px}
+.taboo .hero{text-align:center;padding:44px 20px 36px;margin-bottom:36px}
+.taboo .hero h1{font-size:2.8rem;font-weight:900;letter-spacing:5px}
+.taboo .hero .tag{display:inline-block;margin-top:12px;background:#c4a574;color:#3d2b1f;padding:6px 28px;border-radius:999px;font-weight:700;font-size:.95rem}
+.taboo .gates{display:flex;gap:28px}
+.taboo .gate{flex:1;border-radius:24px;padding:22px 18px 28px;border:1px solid rgba(107,83,68,.12);transition:transform .25s,border-color .25s}
+.taboo .gate:hover{transform:translateY(-6px);border-color:rgba(107,83,68,.22)}
+.taboo .gate-l{border-top:8px solid #b5342c}
+.taboo .gate-r{border-top:8px solid #357a42}
+.taboo .gate-head{font-size:1.35rem;font-weight:900;display:flex;align-items:center;gap:8px;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid #e6dace}
+.taboo .gate-l .gate-head{color:#b5342c}
+.taboo .gate-r .gate-head{color:#357a42}
+.taboo .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.taboo .fcard{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1/1;cursor:pointer;background:rgba(245,239,230,.5);transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.taboo .fcard:hover{transform:scale(1.04);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.taboo .fcard img{width:100%;height:100%;object-fit:cover;display:block}
+.taboo .fcard .mini{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.62));color:#fff;font-size:.72rem;padding:18px 6px 5px;text-align:center}
+.taboo .fcard .tip{position:absolute;inset:0;background:rgba(30,20,10,.82);color:#ffe8c8;font-size:.78rem;display:flex;align-items:center;justify-content:center;padding:8px;text-align:center;opacity:0;transition:opacity .2s;border-radius:16px}
+.taboo .fcard:hover .tip{opacity:1}
+.taboo .quote{margin:48px 0 20px;background:rgba(245,239,230,.65);border-radius:40px 12px 40px 12px;padding:26px 30px;text-align:center;font-size:1.05rem}
+.taboo .quote b{font-size:1.3rem}
+.taboo footer{text-align:center;padding:28px 0 18px;font-size:.72rem;color:#786653;border-top:1px solid #dbcfbe;margin-top:40px}
+/* twelve */
+.twelve body,.twelve{color:#5c3d2e}
+.twelve .header{text-align:center;padding:50px 20px;margin-bottom:50px;color:#4a4036}
+.twelve .header h1{margin:0;font-size:2.5em}
+.twelve .header p{font-size:1.2em;opacity:.85;color:#7a6a58}
+.twelve .timeline-container{max-width:1200px;margin:0 auto;position:relative;padding:0 20px 48px}
+.twelve .timeline-container::after{content:'';position:absolute;width:6px;background:#a1887f;top:0;bottom:0;left:50%;margin-left:-3px;border-radius:3px;z-index:1}
+.twelve .timeline-item{padding:20px 40px;position:relative;width:50%;box-sizing:border-box}
+.twelve .timeline-item.left{left:0;text-align:right;padding-right:60px}
+.twelve .timeline-item.right{left:50%;text-align:left;padding-left:60px}
+.twelve .year-tag{display:inline-block;background:#8d6e63;color:#fff;padding:8px 15px;border-radius:20px;font-weight:bold;font-size:1.2em;margin-bottom:15px}
+.twelve .content-card{padding:20px;border-radius:10px;border:1px solid rgba(107,83,68,.12);transition:transform .3s,border-color .3s}
+.twelve .content-card:hover{transform:translateY(-5px);border-color:rgba(107,83,68,.22)}
+.twelve .content-card img{width:100%;max-width:300px;height:auto;border-radius:8px;display:block;margin:0 auto 15px;border:3px solid #efebe9}
+.twelve .card-text h3{margin:0 0 10px;color:#4e342e;font-size:1.5em}
+.twelve .card-text p{margin:5px 0;line-height:1.6;color:#6d4c41}
+.twelve .season{font-weight:bold;color:#d84315;font-size:1.1em}
+@media(max-width:680px){.taboo .gates{flex-direction:column}.taboo .hero h1{font-size:1.9rem}}
+@media(max-width:768px){
+  .twelve .timeline-container::after{left:30px}
+  .twelve .timeline-item,.twelve .timeline-item.left,.twelve .timeline-item.right{width:100%;left:0;text-align:left;padding-left:70px;padding-right:25px}
+}
+</style>
+</head>
+<body>
+
+<div id="pane-taboo" class="embed-pane taboo">
+<div class="container">
+  <div class="hero">
+    <h1>长街宴 · 信仰之味</h1>
+    <div class="tag">🚫 禁忌不上席 &nbsp;&nbsp;｜&nbsp;&nbsp; ✅ 可上圣席</div>
+  </div>
+  <div class="gates">
+    <div class="gate gate-l">
+      <div class="gate-head">🚫 禁忌不上席</div>
+      <div class="fgrid">
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/snail.jpg" alt="田螺"><span class="mini">田螺</span><div class="tip">淤泥环境<br>文化视为不洁</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/eel.jpg" alt="黄鳝"><span class="mini">黄鳝</span><div class="tip">形态模糊<br>不合神圣秩序</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/chicken.jpg" alt="家鸡"><span class="mini">家鸡</span><div class="tip">日常祭品<br>庄重性不足</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/duck.jpg" alt="家鸭"><span class="mini">家鸭</span><div class="tip">日常家禽<br>不入寨神圣宴</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/dog.jpg" alt="狗肉"><span class="mini">狗肉</span><div class="tip">驱鬼用途<br>排除于感恩祭</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/pig.jpg" alt="家猪"><span class="mini">家猪</span><div class="tip">非祭祀龙猪<br>未被祝祷</div></div>
+      </div>
+    </div>
+    <div class="gate gate-r">
+      <div class="gate-head">✅ 可上圣席</div>
+      <div class="fgrid">
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/partridge.jpg" alt="竹鸡"><span class="mini">竹鸡 / 山鸡</span><div class="tip">山林野性<br>寨神喜爱祭品</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/fish.jpg" alt="梯田鱼"><span class="mini">梯田鱼</span><div class="tip">稻鱼共生<br>四素同构结晶</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/bird.jpg" alt="鸟类"><span class="mini">鸟类</span><div class="tip">山林生长<br>自然馈赠</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/bee-larva.jpg" alt="蜂蛹"><span class="mini">蜂蛹</span><div class="tip">悬崖采集<br>稀缺与勇气</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/quail-egg.jpg" alt="鹌鹑蛋"><span class="mini">鹌鹑蛋</span><div class="tip">梯田环境<br>自然孕育</div></div>
+        <div class="fcard"><img src="image/长街宴美食板块所有图片/mushroom.jpg" alt="野生菌"><span class="mini">野生菌</span><div class="tip">山林自生<br>自然珍品</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="quote"><b>"唯有来自山林与梯田的『自然珍馐』<br>方具资格登上寨神圣宴。"</b></div>
+  <footer>数据新闻大赛 · 哈尼族长街宴 · 信仰筛选模块</footer>
+</div>
+</div>
+
+<div id="pane-twelve" class="embed-pane twelve">
+  <div class="header"><h1>哈尼族长街宴</h1><p>十二道风味图谱 · 农耕智慧与味觉记忆</p></div>
+  <div class="timeline-container">
+    <div class="timeline-item left"><div class="content-card"><img src="image/长街宴美食板块所有图片/七彩糯米饭.jpg" alt="七彩糯米饭"><div class="card-text"><div class="year-tag">春 · 秋</div><h3>七彩糯米饭</h3><span class="season">【劳作：插秧 / 收割】</span><p>红、紫、黄、白、黑五色交织，源自植物染料。是长街宴上最耀眼的视觉中心，象征着五谷丰登。</p></div></div></div>
+    <div class="timeline-item right"><div class="content-card"><img src="image/长街宴美食板块所有图片/梯田鱼.jpg" alt="梯田鱼"><div class="card-text"><div class="year-tag">夏 · 秋</div><h3>梯田鱼</h3><span class="season">【劳作：稻田养鱼】</span><p>利用梯田生态系统，稻鱼共生。肉质鲜美，汤汁浓郁，体现了“一水两用”的生态智慧。</p></div></div></div>
+    <div class="timeline-item left"><div class="content-card"><img src="image/长街宴美食板块所有图片/zhan shui ji.png" alt="蘸水鸡"><div class="card-text"><div class="year-tag">全 年</div><h3>蘸水鸡</h3><span class="season">【劳作：山林放养】</span><p>散养土鸡，肉质紧实。配以秘制蘸料，鲜香麻辣，是长街宴上不可或缺的开胃大菜。</p></div></div></div>
+    <div class="timeline-item right"><div class="content-card"><img src="image/长街宴美食板块所有图片/油炸蜂蛹.jpg" alt="油炸蜂蛹"><div class="card-text"><div class="year-tag">春 · 秋</div><h3>油炸蜂蛹</h3><span class="season">【劳作：山林管护】</span><p>高蛋白的森林馈赠。金黄酥脆，香气扑鼻，展现了哈尼人对山林资源的极致利用。</p></div></div></div>
+    <div class="timeline-item left"><div class="content-card"><img src="image/长街宴美食板块所有图片/焖锅酒.jpg" alt="焖锅酒"><div class="card-text"><div class="year-tag">春 · 秋</div><h3>焖锅酒</h3><span class="season">【劳作：谷物种植+酿酒】</span><p>红米酿造，醇厚甘甜。不仅是饮品，更是哈尼族节庆祭祀中沟通天地的神圣媒介。</p></div></div></div>
+    <div class="timeline-item right"><div class="content-card"><img src="image/长街宴美食板块所有图片/牛干巴.png" alt="牛干巴"><div class="card-text"><div class="year-tag">全 年</div><h3>牛干巴</h3><span class="season">【劳作：畜牧养殖+加工】</span><p>黄牛肉腌制风干，咸香有嚼劲。切片煎炒，油而不腻，是哈尼族待客的上等佳肴。</p></div></div></div>
+    <div class="timeline-item left"><div class="content-card"><img src="image/长街宴美食板块所有图片/油炸竹虫.jpg" alt="油炸竹虫"><div class="card-text"><div class="year-tag">秋 季</div><h3>油炸竹虫</h3><span class="season">【劳作：竹林管护】</span><p>竹虫富含蛋白质，口感酥脆。这是哈尼族“靠山吃山”的极致体现，勇敢者的美味。</p></div></div></div>
+    <div class="timeline-item right"><div class="content-card"><img src="image/长街宴美食板块所有图片/哈尼豆豉.jpg" alt="哈尼豆豉"><div class="card-text"><div class="year-tag">春 · 秋</div><h3>哈尼豆豉</h3><span class="season">【劳作：大豆种植+发酵】</span><p>大豆发酵的结晶，独特的豉香是哈尼古菜的“灵魂”，提味增鲜，回味无穷。</p></div></div></div>
+    <div class="timeline-item left"><div class="content-card"><img src="image/长街宴美食板块所有图片/凉拌魔芋.jpg" alt="凉拌魔芋"><div class="card-text"><div class="year-tag">秋 · 冬</div><h3>凉拌魔芋</h3><span class="season">【劳作：作物种植+加工】</span><p>魔芋种植收获后制成粉，口感爽滑Q弹，凉拌食用，是解腻开胃的佳品。</p></div></div></div>
+    <div class="timeline-item right"><div class="content-card"><img src="image/长街宴美食板块所有图片/芭蕉宴.jpg" alt="芭蕉宴"><div class="card-text"><div class="year-tag">夏 · 秋</div><h3>芭蕉宴</h3><span class="season">【劳作：果树管护+采摘】</span><p>芭蕉树的全身都是宝。从果实到花蕊，再到宽大的叶片（用作天然餐具），充满了热带雨林的风情。</p></div></div></div>
+    <div class="timeline-item left"><div class="content-card"><img src="image/长街宴美食板块所有图片/豆腐圆子.jpg" alt="豆腐圆子"><div class="card-text"><div class="year-tag">全 年</div><h3>豆腐圆子</h3><span class="season">【劳作：大豆种植+发酵】</span><p>大豆磨浆点卤，手工捏制成型。外皮微焦，内里嫩滑，清淡中透着豆香，老少皆宜。</p></div></div></div>
+    <div class="timeline-item right"><div class="content-card"><img src="image/长街宴美食板块所有图片/糯米血肠.jpg" alt="糯米血肠"><div class="card-text"><div class="year-tag">秋 · 冬</div><h3>糯米血肠</h3><span class="season">【劳作：谷物种植+畜牧养殖】</span><p>猪血混合糯米灌入肠衣，风味浓郁独特，是哈尼人祭祀祖先、款待贵宾的重要供品。</p></div></div></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var view = (new URLSearchParams(location.search).get('view') || 'twelve').toLowerCase();
+  var pane = document.getElementById(view === 'taboo' ? 'pane-taboo' : 'pane-twelve');
+  if (pane) pane.classList.add('is-active');
+  document.title = view === 'taboo' ? '长街宴 · 信仰筛选' : '哈尼族长街宴·十二道风味图谱';
+})();
+</script>
+<script src="js/embed-child.js"></script>
+</body>
+</html>
